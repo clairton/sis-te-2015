@@ -1,6 +1,7 @@
 package br.edu.horus;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
@@ -34,6 +35,22 @@ public class RgTest {
 		Rg rg = new Rg("123456", "Maracujá", new Pessoa());
 		assertTrue(validator.validate(rg).isEmpty());
 	}
+	
+	
+	
+	@Test
+	public void testHora(){
+		String regex = "[0-9]{2}:[0-9]{2}:[0-9]{2}";
+		assertTrue("01:54:22".matches(regex));
+		assertFalse("2:22:22".matches(regex));
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
