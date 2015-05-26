@@ -21,4 +21,16 @@ public class Pessoa {
 		this.nome = nome;
 		this.nascidoEm = nascidoEm;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public Date getNascidoEm() {
+		return nascidoEm;
+	}
+	
+	public Integer getId() {
+		return id;
+	}	
 }

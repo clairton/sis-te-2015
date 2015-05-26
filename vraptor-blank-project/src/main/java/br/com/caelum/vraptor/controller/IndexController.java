@@ -1,7 +1,5 @@
 package br.com.caelum.vraptor.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,16 +34,12 @@ public class IndexController {
 	}
 
 	@Path("/")
-	public void index() {
-		
+	public List<Pessoa> index() {		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Pessoa> cq = cb.createQuery(Pessoa.class);
 		cq.from(Pessoa.class);
 		TypedQuery<Pessoa> query = entityManager.createQuery(cq);
-		List<Pessoa> pessoas = query.getResultList();
-			
-		result.use(Results.json())
-				.from(pessoas, "pessoas").serialize();
+		return query.getResultList();
 	}
 	
 	
