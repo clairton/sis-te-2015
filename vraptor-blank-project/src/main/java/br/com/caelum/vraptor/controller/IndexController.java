@@ -7,11 +7,13 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.model.Pessoa;
-import br.com.caelum.vraptor.view.Results;
+import br.com.caelum.vraptor.serialization.gson.WithRoot;
 
 @Controller
 public class IndexController {
@@ -43,12 +45,22 @@ public class IndexController {
 	}
 	
 	
+	@Path("/{id}")
+	public void show(Integer id){
+		Pessoa pessoa = entityManager.find(Pessoa.class, id);
+	    result.include("pessoa", pessoa);
+	}
 	
 	
-	
-	
-	
-	
-	
-	
+	@Consumes(
+			value="application/x-www-form-urlencoded", 
+			options=WithRoot.class)
+	@Post("/update")
+	public void update(Pessoa pessoa){
+		entityManager.getTransaction().begin();
+		entityManager.merge(pessoa);
+		entityManager.flush();
+		entityManager.getTransaction().commit();
+		result.redirectTo(IndexController.class).index();
+	}
 }

@@ -33,4 +33,16 @@ public class Pessoa {
 	public Integer getId() {
 		return id;
 	}	
+	
+	public void setNascidoEm(Date nascidoEm) {
+		this.nascidoEm = nascidoEm;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }

@@ -7,8 +7,13 @@
 </head>
 <body>
 	<ul>
-		<c:forEach items="${pessoaList}" var="pessoa">
-		    <li>${pessoa.nome} - ${pessoa.nascidoEm}</li>
+		<c:forEach items="${pessoaList}" var="pessoa"> 
+		    <li>
+		    	<a href="${linkTo[IndexController].show(pessoa.id)}">
+		    		${pessoa.nome}
+		    	</a>
+		    	- ${pessoa.nascidoEm}
+		   	</li>
 		</c:forEach>
 	</ul>
 </body>
