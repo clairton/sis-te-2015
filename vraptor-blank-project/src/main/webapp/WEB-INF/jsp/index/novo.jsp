@@ -6,9 +6,7 @@
 <title>VRaptor Blank Project</title>
 </head>
 <body>	
-	<form action="<c:url value='/update'/>" method="POST">
-	    <input value="${pessoa.id}" name="pessoa.id" readonly="readonly"/>
-	    
+	<form action="<c:url value='/create'/>" method="POST">	    
 	    <input value="${pessoa.nome}" name="pessoa.nome"/>
 	    	    
 	    <input type="date" value="${pessoa.nascidoEm}" name="pessoa.nascidoEm"/>	    

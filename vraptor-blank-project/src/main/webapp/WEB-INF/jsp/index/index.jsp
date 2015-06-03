@@ -6,6 +6,9 @@
 <title>VRaptor Blank Project</title>
 </head>
 <body>
+   	<a href="${linkTo[IndexController].novo()}">
+   		Novo
+   	</a>
 	<ul>
 		<c:forEach items="${pessoaList}" var="pessoa"> 
 		    <li>
@@ -13,6 +16,10 @@
 		    		${pessoa.nome}
 		    	</a>
 		    	- ${pessoa.nascidoEm}
+		    	
+		    	<a href="${linkTo[IndexController].delete(pessoa.id)}">
+		    		Deletar
+		    	</a>
 		   	</li>
 		</c:forEach>
 	</ul>

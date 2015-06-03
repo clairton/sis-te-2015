@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
@@ -50,10 +51,37 @@ public class IndexController {
 		Pessoa pessoa = entityManager.find(Pessoa.class, id);
 	    result.include("pessoa", pessoa);
 	}
+
+	/******************************************/
+	@Get("/novo")
+	public void novo(){
+		
+	}
+	
+	@Post("/create")
+	public void create(Pessoa pessoa){
+		entityManager.getTransaction().begin();
+		entityManager.persist(pessoa);
+		entityManager.flush();
+		entityManager.getTransaction().commit();
+		result.redirectTo(IndexController.class).index();
+	}
+	
+
+	@Get("/delete/{id}")
+	public void delete(Integer id){
+		Pessoa pessoa = entityManager.find(Pessoa.class, id);
+		entityManager.getTransaction().begin();
+		entityManager.remove(pessoa);
+		entityManager.flush();
+		entityManager.clear();
+		entityManager.getTransaction().commit();
+		result.redirectTo(IndexController.class).index();
+	}
 	
 	
 	@Consumes(
-			value="application/x-www-form-urlencoded", 
+			value={"application/x-www-form-urlencoded", "text/html"}, 
 			options=WithRoot.class)
 	@Post("/update")
 	public void update(Pessoa pessoa){
