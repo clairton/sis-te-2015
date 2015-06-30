@@ -59,23 +59,18 @@ public class IndexController {
 	}
 	
 	@Post("/create")
+	@Transactional
 	public void create(Pessoa pessoa){
-		entityManager.getTransaction().begin();
 		entityManager.persist(pessoa);
-		entityManager.flush();
-		entityManager.getTransaction().commit();
 		result.redirectTo(IndexController.class).index();
 	}
 	
 
 	@Get("/delete/{id}")
+	@Transactional
 	public void delete(Integer id){
 		Pessoa pessoa = entityManager.find(Pessoa.class, id);
-		entityManager.getTransaction().begin();
 		entityManager.remove(pessoa);
-		entityManager.flush();
-		entityManager.clear();
-		entityManager.getTransaction().commit();
 		result.redirectTo(IndexController.class).index();
 	}
 	
@@ -84,11 +79,9 @@ public class IndexController {
 			value={"application/x-www-form-urlencoded", "text/html"}, 
 			options=WithRoot.class)
 	@Post("/update")
+	@Transactional
 	public void update(Pessoa pessoa){
-		entityManager.getTransaction().begin();
 		entityManager.merge(pessoa);
-		entityManager.flush();
-		entityManager.getTransaction().commit();
 		result.redirectTo(IndexController.class).index();
 	}
 }
